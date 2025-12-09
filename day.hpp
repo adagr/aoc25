@@ -48,11 +48,13 @@ class Day {
 
       auto pos = s.find(delim);
       if (pos == std::string::npos) {
-        numbers.emplace_back(std::stoll(s));
+        if (s != "")
+          numbers.emplace_back(std::stoll(s));
         break;
       }
 
-      numbers.emplace_back(std::stoll(s.substr(0, pos)));
+      if (pos != 0)
+        numbers.emplace_back(std::stoll(s.substr(0, pos)));
       s = s.erase(0, pos);
     }
 
@@ -69,7 +71,8 @@ class Day {
         break;
       }
 
-      data.emplace_back(s.substr(0, pos));
+      if (s.substr(0, pos) != delim && pos != 0)
+        data.emplace_back(s.substr(0, pos));
       s = s.erase(0, pos + delim.size());
     }
 
